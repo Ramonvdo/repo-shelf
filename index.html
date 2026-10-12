@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>repo-shelf</title>
+    <link rel="stylesheet" href="/src/styles.css" />
+    <script type="module" src="/src/main.ts" defer></script>
+  </head>
+
+  <body>
+    <a class="skip" href="#drawer">Skip to repos</a>
+    <form class="bench" id="add-form" autocomplete="off">
+      <label class="visually-hidden" for="link">GitHub link</label>
+      <input
+        id="link"
+        name="link"
+        type="text"
+        spellcheck="false"
+        placeholder="Paste a GitHub link or owner/repo"
+        required
+        aria-describedby="link-error"
+      />
+      <label class="visually-hidden" for="drawer-name">Category</label>
+      <input
+        id="drawer-name"
+        name="category"
+        type="text"
+        list="drawer-names"
+        spellcheck="false"
+        placeholder="Category"
+        required
+      />
+      <datalist id="drawer-names"></datalist>
+      <button class="primary" type="submit" id="add-button">File it</button>
+      <p class="field-error" id="link-error" hidden></p>
+    </form>
+
+    <div class="cabinet">
+      <nav class="drawers" aria-label="Categories">
+        <ul id="drawers"></ul>
+      </nav>
+
+      <main class="drawer" id="drawer" tabindex="-1" aria-labelledby="drawer-title">
+        <header class="drawer-head">
+          <h1 id="drawer-title">All repos</h1>
+          <button class="quiet" type="button" id="remove-drawer" hidden>Remove category</button>
+        </header>
+        <ul class="parts" id="parts"></ul>
+        <div class="empty" id="empty" hidden></div>
+      </main>
+    </div>
+
+    <section class="sheet" id="sheet" hidden aria-labelledby="sheet-title">
+      <header class="sheet-head">
+        <h2 id="sheet-title"></h2>
+        <button class="icon-button" type="button" id="sheet-close" aria-label="Close">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg>
+        </button>
+      </header>
+      <div id="sheet-body"></div>
+    </section>
+
+    <footer class="bar">
+      <button class="quiet" type="button" id="open-connect" aria-controls="sheet" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12 22v-5" /><path d="M9 8V2" /><path d="M15 8V2" />
+          <path d="M18 8v5a4 4 0 0 1-4 4h-4a4 4 0 0 1-4-4V8Z" />
+        </svg>
+        Connect agent
+      </button>
+      <button class="quiet" type="button" id="open-token" aria-controls="sheet" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path
+            d="M2.586 17.414A2 2 0 0 0 2 18.828V21a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h1a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h.172a2 2 0 0 0 1.414-.586l.814-.814a6.5 6.5 0 1 0-4-4z"
+          />
+          <circle cx="16.5" cy="7.5" r=".5" />
+        </svg>
+        <span id="token-label">GitHub token</span>
+      </button>
+      <p class="status" id="status" role="status" aria-live="polite"></p>
+    </footer>
+  </body>
+</html>
